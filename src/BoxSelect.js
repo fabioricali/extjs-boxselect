@@ -340,10 +340,12 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
         // to pass the field instead of exposing the underlying selection model
         me.mon(me.selectionModel, {
             'selectionchange': function(selModel, selectedRecs) {
+                console.log('selectionchange');
                 me.applyMultiselectItemMarkup();
                 me.fireEvent('valueselectionchange', me, selectedRecs);
             },
             'focuschange': function(selectionModel, oldFocused, newFocused) {
+                console.log('valuefocuschange');
                 me.fireEvent('valuefocuschange', me, oldFocused, newFocused);
             },
             scope: me
@@ -1278,6 +1280,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
         if (Ext.isString(value) && me.multiSelect) {
             value = value.split(me.delimiter);
         }
+
         value = Ext.Array.from(value, true);
 
         for (i = 0, len = value.length; i < len; i++) {
@@ -1335,6 +1338,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
             }
         }
 
+        console.log(value);
         return me.callParent([value, doSelect]);
     },
 
@@ -1343,6 +1347,7 @@ Ext.define('Ext.ux.form.field.BoxSelect', {
      * @return {Array} The records for the field's current value
      */
     getValueRecords: function() {
+        console.log('getValueRecords');
         return this.valueStore.getRange();
     },
 
